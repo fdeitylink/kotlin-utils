@@ -23,9 +23,7 @@ import javafx.scene.control.ButtonType
 import javafx.scene.control.Tab
 import javafx.scene.control.Tooltip
 
-import io.fdeitylink.keroedit.Messages
 
-//TODO: Get rid of @JvmOverloads annotation once I convert MapEditTab to Kotlin
 abstract class FileEditTab
 @JvmOverloads protected constructor(path: Path, text: String? = null, content: Node? = null): Tab(text, content) {
     //https://xkcd.com/853/
@@ -53,7 +51,7 @@ abstract class FileEditTab
         onCloseRequest = EventHandler<Event> { event ->
             if (isChanged) {
                 val alert = FXUtil.createAlert(title = this.text?.substring(0, this.text.lastIndexOf('*')),
-                                               message = Messages["FileEditTab.UNSAVED_CHANGES"])
+                                               message = "This tab has unsaved changes. Save before closing?")
 
                 alert.buttonTypes.addAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL)
                 alert.showAndWait().ifPresent {
