@@ -24,7 +24,7 @@ import javafx.scene.control.Tab
 import javafx.scene.control.Tooltip
 
 abstract class FileEditTab
-@JvmOverloads protected constructor(path: Path, text: String? = null, content: Node? = null): Tab(text, content) {
+@JvmOverloads protected constructor(path: Path, text: String? = null, content: Node? = null) : Tab(text, content) {
     //https://xkcd.com/853/
     private val undoQueue = ArrayDeque<UndoableEdit>()
     private val redoQueue = ArrayDeque<UndoableEdit>()
@@ -50,7 +50,7 @@ abstract class FileEditTab
         onCloseRequest = EventHandler<Event> { event ->
             if (isChanged) {
                 val alert = createAlert(title = this.text?.substring(0, this.text.lastIndexOf('*')),
-                                               message = "This tab has unsaved changes. Save before closing?")
+                                        message = "This tab has unsaved changes. Save before closing?")
 
                 alert.buttonTypes.addAll(ButtonType.YES, ButtonType.NO, ButtonType.CANCEL)
                 alert.showAndWait().ifPresent {
