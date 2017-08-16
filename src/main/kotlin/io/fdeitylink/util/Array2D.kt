@@ -38,9 +38,8 @@ import java.util.Arrays
  * Most of the time, however, the [emptyArray2D], [array2DOfNulls], and [invoke] methods should
  * be used for constructing a new `Array2D`.
  *
- * @throws IllegalArgumentException if [height] does not match [backing.size][Array.size],
- * [width] does not match the width of at least one row of [backing], or [backing] is not
- * a purely rectangular array (the widths of its rows are inconsistent).
+ * @throws IllegalArgumentException if [backing] is not a purely rectangular array (the widths of
+ * its rows are inconsistent).
  *
  * @property width The width of this `Array2D`.
  *
@@ -55,14 +54,13 @@ import java.util.Arrays
  * methodTakingStandard2DArray(anArray2D.backing)
  * ```
  */
-//TODO: Allow backing to be a primitive array (e.g. IntArray)
+//TODO: Allow backing to be an Array of primitive arrays (e.g. Array<IntArray>)
 class Array2D<T>(val backing: Array<Array<T>>) {
     val height = backing.size
     val width = if (backing.isEmpty()) 0 else backing[0].size
 
     init {
         if (backing.isNotEmpty()) {
-            //TODO: Use backing[row - 1] rather than prevWidth?
             var prevWidth = backing[0].size
 
             for (row in backing) {
@@ -103,7 +101,7 @@ class Array2D<T>(val backing: Array<Array<T>>) {
         /**
          * Returns a [String] representation of [array2D] equivalent to [Arrays.deepToString].
          */
-        fun <T> toString(array2D: Array2D<T>): String = Arrays.deepToString(array2D.backing)
+        fun toString(array2D: Array2D<*>): String = Arrays.deepToString(array2D.backing)
     }
 
     /**
@@ -145,8 +143,7 @@ class Array2D<T>(val backing: Array<Array<T>>) {
      * Calls [action] on each element. Note that it will iterate through each element of each _row_,
      * not of each column.
      */
-    inline fun forEach(action: (T) -> Unit) =
-            backing.forEach { it.forEach { action.invoke(it) } }
+    inline fun forEach(action: (T) -> Unit) = backing.forEach { it.forEach { action.invoke(it) } }
 
     /**
      * Calls [action] on each element, giving it the element as well as its x and y coordinates. Note
@@ -159,7 +156,7 @@ class Array2D<T>(val backing: Array<Array<T>>) {
     /**
      * Returns a new `Array2D` with the same elements as this one.
      */
-    inline fun <reified T> clone() = Array2D<T>(this.width, this.height) { x, y -> this[x, y] as T }
+    inline fun <reified T> clone() = Array2D(this.width, this.height) { x, y -> this[x, y] as T }
 }
 
 /**
@@ -186,7 +183,7 @@ inline fun <reified T> array2DOfNulls(width: Int, height: Int) = Array2D(Array(h
  */
 inline fun <reified T> array2DOf(width: Int, vararg elements: T): Array2D<T> {
     require(0 == elements.size % width)
-    { "size of elements must be divisible by width (width: $width, size: ${elements.size})" }
+    { "elements.size must be divisible by width (width: $width, size: ${elements.size})" }
 
     return Array2D(width, elements.size / width) { x, y -> elements[(width * y) + x] }
 }
