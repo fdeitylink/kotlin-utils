@@ -9,6 +9,3 @@ before_install: # Set local Maven repository
 install:
   - echo Assembling $GROUP.$ARTIFACT-$VERSION
   - ./kobaltw assemble && ./kobaltw publishToMavenLocal
-  - ls -R ~/.m2/repository
-  # JavaDoc JAR will be empty (Dokka not configured and is buggy anyway)
- # - rm ~/.m2/repository/$(echo $GROUP | tr . /)/$ARTIFACT/$VERSION/$ARTIFACT-$VERSION-javadoc.jar
