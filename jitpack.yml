@@ -1,4 +1,4 @@
-before_install: # Set local Maven repository
+before_install: # Give ./kobaltw execute permissions and set local Maven repository
   - chmod u+x ./kobaltw
   - mkdir -p $HOME/.config/kobalt
   - "echo \
@@ -8,4 +8,4 @@ before_install: # Set local Maven repository
 
 install:
   - echo Assembling $GROUP.$ARTIFACT-$VERSION
-  - ./kobaltw assemble && ./kobaltw publishToMavenLocal
+  - ./kobaltw clean && ./kobaltw assemble && ./kobaltw publishToMavenLocal
