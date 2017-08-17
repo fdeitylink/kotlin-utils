@@ -1,0 +1,12 @@
+before_install: # Set local Maven repository
+  - mkdir -p $HOME/.config/kobalt
+  - "echo \
+\"<kobaltSettings>
+  <localMavenRepo>~/.m2/repository</localMavenRepo>
+</kobaltSettings>\" > $HOME/.config/kobalt/settings.xml"
+
+install:
+  - echo Assembling $GROUP.$ARTIFACT-$VERSION
+  - ./kobaltw assemble && ./kobaltw publishToMavenLocal
+  # JavaDoc JAR will be empty (Dokka not configured and is buggy anyway)
+  - rm ~/.m2.repository/$GROUP/$ARTIFACT/$VERSION/$ARTIFACT-$VERSION-javadoc.jar
