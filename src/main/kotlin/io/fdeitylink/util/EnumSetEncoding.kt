@@ -1,3 +1,6 @@
+@file:JvmName("UtilsKt")
+@file:JvmMultifileClass
+
 package io.fdeitylink.util
 
 import java.util.EnumSet
