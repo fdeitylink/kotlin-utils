@@ -3,7 +3,7 @@ before_install: # Set local Maven repository
   - mkdir -p $HOME/.config/kobalt
   - "echo \
 \"<kobaltSettings>
-  <localMavenRepo>~/.m2/repository</localMavenRepo>
+  <localMavenRepo>$HOME/.m2/repository</localMavenRepo>
 </kobaltSettings>\" > $HOME/.config/kobalt/settings.xml"
 
 install:
