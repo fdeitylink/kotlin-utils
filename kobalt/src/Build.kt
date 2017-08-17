@@ -12,7 +12,7 @@ val kotlinVersion = "1.1.4"
 @Suppress("unused")
 val project = project {
     name = "KotlinUtils"
-    group = "io.fdeitylink"
+    group = "com.github.fdeitylink"
     artifactId = name
     version = "0.0.1"
 
