@@ -25,10 +25,10 @@ import java.util.Arrays
  *
  * @constructor
  * Constructs a new `Array2D`, given its [width], [height], and a [backing] 2D array.
+ *
  * This constructor is useful for turning a regular Java 2D array (or `Array<Array<T>>`)
  * into an `Array2D`. For example, the following would create an `Array2D` with `regArray`
  * as its backing list.
- *
  * ```
  * //Java
  * String[][] regArray = {{"Hello", "World"}, {"Alice", "Bob"}};
@@ -38,8 +38,8 @@ import java.util.Arrays
  * Most of the time, however, the [emptyArray2D], [array2DOfNulls], and [invoke] methods should
  * be used for constructing a new `Array2D`.
  *
- * @throws IllegalArgumentException if [backing] is not a purely rectangular array (the widths of
- * its rows are inconsistent).
+ * @throws IllegalArgumentException if [backing] is not a purely rectangular array (the widths
+ * of its rows are inconsistent).
  *
  * @property width The width of this `Array2D`.
  *
@@ -105,8 +105,9 @@ class Array2D<T>(val backing: Array<Array<T>>) {
     }
 
     /**
-     * Returns the row stored by this `Array2D` with index [y]. As an operator, this method
-     * can also be called with the index operator:
+     * Returns the row stored by this `Array2D` with index [y].
+     *
+     * As an operator, this method can also be called with the index operator:
      * ```
      * val row = array2D[y]
      * ```
@@ -116,8 +117,9 @@ class Array2D<T>(val backing: Array<Array<T>>) {
     operator fun get(y: Int) = backing[y]
 
     /**
-     * Returns the element stored by this `Array2D` with coordinates ([x], [y]). As an
-     * operator, this method can also be called with the index operator:
+     * Returns the element stored by this `Array2D` with coordinates ([x], [y]).
+     *
+     * As an operator, this method can also be called with the index operator:
      * ```
      * val value = array2D[x, y]
      * ```
