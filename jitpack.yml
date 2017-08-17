@@ -1,4 +1,5 @@
 before_install: # Set local Maven repository
+  - chmod u+x ./kobaltw
   - mkdir -p $HOME/.config/kobalt
   - "echo \
 \"<kobaltSettings>
