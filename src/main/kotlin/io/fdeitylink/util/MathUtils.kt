@@ -1,3 +1,6 @@
+@file:JvmName("UtilsKt")
+@file:JvmMultifileClass
+
 package io.fdeitylink.util
 
 //TODO: Verify lower < upper for each of these
