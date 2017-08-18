@@ -8,4 +8,4 @@ before_install: # Give ./kobaltw execute permissions and set local Maven reposit
 
 install:
   - echo Assembling $GROUP.$ARTIFACT-$VERSION
-  - ./kobaltw clean && ./kobaltw assemble && ./kobaltw publishToMavenLocal
+  - ./kobaltw clean && ./kobaltw publishToMavenLocal

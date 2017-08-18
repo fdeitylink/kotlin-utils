@@ -67,6 +67,7 @@ fun taskRemoveJavadocJar(project: Project): TaskResult {
                                "${project.name}-${project.version}-javadoc.jar").toAbsolutePath()
     return try {
         Files.delete(javadocJar)
+        println("Deleted $javadocJar")
         TaskResult()
     }
     catch (except: Exception) {
