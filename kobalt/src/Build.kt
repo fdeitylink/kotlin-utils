@@ -16,7 +16,7 @@ import org.apache.maven.model.License
 import org.apache.maven.model.Scm
 import org.apache.maven.model.Developer
 
-val kotlinVersion = "1.1.4"
+val kotlinVersion = "1.1.4-2"
 
 @Suppress("unused")
 val project = project {
