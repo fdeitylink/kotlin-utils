@@ -26,12 +26,11 @@ import java.util.Arrays
  *  - Create separate classes? Sealed classes?
  */
 class ValidatedArray<T>(private val _backing: Array<T>, private val validator: (Int, T) -> Boolean) {
-    val size get() = _backing.size
+    val size = _backing.size
 
-    val indices = _backing.indices
+    val indices get() = _backing.indices
 
-    //TODO: Rename to something else that indicates it is a separate Array, not a ValidatedArray
-    val copy: Array<T>
+    val backingClone: Array<T>
         get() = Arrays.copyOf(_backing, _backing.size)
 
     companion object {
