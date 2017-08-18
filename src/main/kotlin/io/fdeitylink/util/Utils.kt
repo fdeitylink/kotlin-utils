@@ -19,8 +19,12 @@
 
 package io.fdeitylink.util
 
+import java.nio.charset.Charset
+
 import java.nio.file.Path
 import java.nio.file.Files
+
+import java.io.IOException
 
 /**
  * Returns the filename of this [Path] sans the ending [extension]
@@ -40,14 +44,36 @@ fun Path.baseFilename(extension: String = "."): String {
 }
 
 /**
+ * Returns the contents of the file pointed to by the receiving [Path] as a [String],
+ * or an empty [String] if the file [is not a regular file][Files.isRegularFile].
+ *
+ * @throws IOException if any IO error occurs while opening or reading the file
+ */
+@Throws(IOException::class)
+private fun Path.getContents(charset: Charset = Charsets.UTF_8): String {
+    val result = StringBuilder()
+
+    if (Files.isRegularFile(this)) {
+        Files.newBufferedReader(this, charset).use {
+            val buf = CharArray(DEFAULT_BUFFER_SIZE) { 0.toChar() }
+            var read = it.read(buf)
+
+            while (read >= 0) {
+                result.append(String(buf, 0, read))
+                read = it.read(buf)
+            }
+        }
+    }
+
+    return result.toString()
+}
+
+/**
  * Executes the given [block] function on the receiving resource and then
  * closes it down correctly whether an exception is thrown or not. Ripped
  * from the [Closeable][java.io.Closeable] extension method defined in [kotlin.io].
- *
- * @param block a function to process this [AutoCloseable] resource.
- * @return the result of [block] function invoked on this resource.
  */
-inline fun <T: AutoCloseable, R> T.use(block: (T) -> R): R {
+inline fun <T : AutoCloseable, R> T.use(block: (T) -> R): R {
     var closed = false
     try {
         return block(this)
