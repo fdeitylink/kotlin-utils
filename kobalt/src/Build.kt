@@ -57,29 +57,3 @@ val project = project {
         })
     }
 }
-
-@Suppress("unused")
-@Task(name = "removeJavadocJar", description = "Remove empty Javadoc JAR from output",
-      alwaysRunAfter = arrayOf("assemble"))
-fun taskRemoveJavadocJar(project: Project): TaskResult {
-    //Dokka not configured and is buggy anyway
-    val javadocJar = Paths.get(project.buildDirectory, "libs",
-                               "${project.name}-${project.version}-javadoc.jar").toAbsolutePath()
-    return try {
-        Files.delete(javadocJar)
-        println("Deleted $javadocJar")
-        TaskResult()
-    }
-    catch (except: Exception) {
-        when (except) {
-            is IOException, is SecurityException -> {
-                System.err.println("Caught ${except::class.simpleName} after attempting to delete $javadocJar")
-                except.printStackTrace()
-
-                TaskResult(false, errorMessage = except.localizedMessage)
-            }
-
-            else -> throw except
-        }
-    }
-}
