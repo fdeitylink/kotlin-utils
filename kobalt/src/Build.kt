@@ -32,19 +32,25 @@ val project = project {
         description = "Utility functions and classes for Kotlin and Java programs"
         url = "https://github.com/FDeityLink/KotlinUtils"
 
-        licenses = listOf(License().apply {
+        licenses = listOf(license {
             name = "Apache 2.0"
             url = "https://apache.org/licenses/LICENSE-2.0"
         })
 
-        scm = Scm().apply {
+        scm = scm {
             url = "https://github.com/FDeityLink/KotlinUtils"
             connection = "https://github.com/FDeityLink/KotlinUtils.git"
             developerConnection = "git@github.com:FDeityLink/KotlinUtils.git"
         }
 
-        developers = listOf(Developer().apply {
+        developers = listOf(developer {
             name = "Brian Christian"
         })
     }
 }
+
+fun license(init: License.() -> Unit) = License().apply { init() }
+
+fun scm(init: Scm.() -> Unit) = Scm().apply { init() }
+
+fun developer(init: Developer.() -> Unit) = Developer().apply { init() }
