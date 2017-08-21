@@ -14,7 +14,7 @@ val project = project {
     name = "kotlin-utils"
     group = "com.github.fdeitylink"
     artifactId = name
-    version = "0.0.1"
+    version = "0.0.2"
 
     dependencies {
         provided("org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion")

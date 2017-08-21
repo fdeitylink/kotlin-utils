@@ -50,7 +50,7 @@ fun Path.baseFilename(extension: String = "."): String {
  * @throws IOException if any IO error occurs while opening or reading the file
  */
 @Throws(IOException::class)
-private fun Path.getContents(charset: Charset = Charsets.UTF_8): String {
+fun Path.getContents(charset: Charset = Charsets.UTF_8): String {
     val result = StringBuilder()
 
     if (Files.isRegularFile(this)) {
